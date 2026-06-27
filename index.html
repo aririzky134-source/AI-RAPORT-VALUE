@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Catatan Sederhana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+    <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">Catatan Saya</h1>
+        
+        <div class="flex gap-2 mb-4">
+            <input type="text" id="inputCatatan" placeholder="Tambahkan tugas baru..." class="flex-1 border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-400">
+            <button onclick="tambahCatatan()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Tambah</button>
+        </div>
+
+        <ul id="daftarCatatan" class="space-y-2">
+            <!-- Catatan akan muncul di sini -->
+        </ul>
+    </div>
+
+    <script>
+        function tambahCatatan() {
+            const input = document.getElementById('inputCatatan');
+            const daftar = document.getElementById('daftarCatatan');
+            
+            if (input.value.trim() === '') return;
+
+            const li = document.createElement('li');
+            li.className = "flex items-center justify-between bg-gray-50 p-3 rounded-lg border";
+            li.innerHTML = `
+                <span onclick="this.classList.toggle('line-through')" class="cursor-pointer flex-1">${input.value}</span>
+                <button onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 font-bold ml-2">×</button>
+            `;
+            daftar.appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
